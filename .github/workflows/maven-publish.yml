@@ -1,10 +1,10 @@
-name: Java CI with Maven
+name: Build Spring Boot App from Subdirectory
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v3
 
     - name: Set up JDK 17
@@ -21,8 +21,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Build with Maven
-      run: mvn clean package --file pom.xml
+    - name: Build with Maven (from demo folder)
+      run: mvn clean package -f demo/pom.xml
 
     - name: Run Tests
-      run: mvn test
+      run: mvn test -f demo/pom.xml
